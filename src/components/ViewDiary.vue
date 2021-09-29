@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1>view diarys here</h1>
+        <h1>Your diary</h1>
         <ul>
             <li v-for="note in notes" :key="note.id">
-                Header: {{note.header}} |
-                date: {{note.date}}<br/>
-                text: {{note.text}}<br/>
+                <p class="viewP">Header: {{note.header}} |
+                date: {{note.date}}</p>
+                <p class="viewP">{{note.text}}</p>
             </li>
         </ul>
     </div>
@@ -23,11 +23,28 @@ export default {
         if(localStorage.getItem("notes") === null){
             localStorage.setItem("notes", "[]")
         }
+        this.notes.sort(function compare(a, b){
+            let dateA = new Date(a.date);
+            let dateB = new Date(b.date);
+            return dateB - dateA; 
+        });
     }
 }
 
 </script>
 
 <style>
-
+    li{
+        padding: 2em;
+        border: 1px solid rgb(255, 255, 255);
+    }
+    .viewP{
+        font-size: 1.3em;
+    }
+    ul{
+        border: 1px solid rgb(255, 255, 255);
+        color: white;
+        background: black;
+    }
+   
 </style>
